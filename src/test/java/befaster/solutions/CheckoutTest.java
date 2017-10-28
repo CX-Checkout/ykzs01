@@ -28,6 +28,7 @@ public class CheckoutTest {
     	assertEquals(Checkout.checkout("B"), 30);
     	assertEquals(Checkout.checkout("C"), 20);
     	assertEquals(Checkout.checkout("D"), 15);
+    	assertEquals(Checkout.checkout("E"), 40);
     }
     
     @Test
@@ -50,9 +51,22 @@ public class CheckoutTest {
     }
     
     @Test
+    public void get_one_free_offer() throws Exception
+    {
+    	assertEquals(Checkout.checkout("EE"), 80);
+    	assertEquals(Checkout.checkout("EEB"), 80);
+    }
+    
+    @Test
+    public void combine_get_one_free_with_multi_price() throws Exception
+    {
+    	assertEquals(Checkout.checkout("EEBB"), 80 + 30);
+    	assertEquals(Checkout.checkout("EEB" + "BB"), 80 + 45);
+    }
+    
+    @Test
     public void round_acceptance_test() throws Exception
     {
-    	assertEquals(Checkout.checkout("AAABBABCD"), 130 + 45 + 50 + 30 + 20 + 15);
-    	assertEquals(Checkout.checkout("BB"), 45);
+    	assertEquals(Checkout.checkout("EEB" + "BB" + "AAAAA" + "A"), 80 + 45 + 200 + 50);
     }
 }

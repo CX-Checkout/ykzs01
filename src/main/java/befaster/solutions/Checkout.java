@@ -23,51 +23,85 @@ public class Checkout {
 		prices.put('B', 30);
 		prices.put('C', 20);
 		prices.put('D', 15);
+		prices.put('E', 40);
 
-		int totalPrice = 0;
 		char[] skus = basket.toCharArray();
 			
-		int countA = 0;
-		int countB = 0;
+		
+		// Check all items
 		for(char sku : skus)
 		{
-			
 			if(!prices.containsKey(sku))
 				throw new IllegalBasketException();
-			
+		}
+		
+		// Count all items
+		int countA = 0;
+		int countB = 0;
+		int countC = 0;
+		int countD = 0;
+		int countE = 0;
+		for(char sku : skus)
+		{
 			if(sku == 'A')
 			{
 				countA++;
 			}
-			
 			if(sku == 'B')
 			{
 				countB++;
 			}
-			
-
-			
-			if(countA == 3)
+			if(sku == 'C')
 			{
-				countA = 0;
-				int valueOfA = 50;
-				totalPrice += 130;
-				totalPrice -= 2*valueOfA;
+				countC++;
 			}
-			else if(countB == 2)
+			if(sku == 'D')
 			{
-				countB = 0;
-				int valueOfB = 30;
-				totalPrice += 45;
-				totalPrice -= 1*valueOfB;
+				countD++;
 			}
-			else
-			{				
-				int itemValue = prices.get(sku);
-				totalPrice += itemValue; 
+			if(sku == 'E')
+			{
+				countE++;
 			}
-
 		}
+		
+		
+		// Add the appropriate values 
+		int totalPrice = 0;
+		
+		while(countE >= 2)
+		{
+			totalPrice += 2 * prices.get('E');
+			if(countB > 0)
+			{
+				countB -= 1;
+			}
+			countE -= 2;
+		}
+		
+		while(countA >= 5)
+		{
+			totalPrice += 200;
+			countA -= 5;
+		}
+		while(countA >= 3)
+		{
+			totalPrice += 130;
+			countA -= 3;
+		}
+		while(countB >= 2)
+		{
+			totalPrice += 45;
+			countB -= 2;
+		}
+		
+		totalPrice += countA * prices.get('A');
+		totalPrice += countB * prices.get('B');
+		totalPrice += countC * prices.get('C');
+		totalPrice += countD * prices.get('D');
+		totalPrice += countE * prices.get('E');
+		
+
 		return totalPrice;
 		
 	}
