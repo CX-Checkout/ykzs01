@@ -28,7 +28,7 @@ public class Checkout {
 		PRICES.put('S', 20);
 		PRICES.put('T', 20);
 		PRICES.put('U', 40);
-		PRICES.put('V', 40);
+		PRICES.put('V', 50);
 		PRICES.put('W', 20);
 		PRICES.put('X', 17);
 		PRICES.put('Y', 20);
