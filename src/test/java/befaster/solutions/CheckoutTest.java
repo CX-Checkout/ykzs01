@@ -33,7 +33,7 @@ public class CheckoutTest {
     }
     
     @Test
-    public void basket_of_single_items()
+    public void basket_of_single_item()
     {
     	assertEquals(Checkout.checkout("ABCD"), 50 + 30 + 20 + 15);
     }
@@ -42,7 +42,8 @@ public class CheckoutTest {
     public void illegal_basket()
     {
     	assertEquals(Checkout.checkout("aa"), -1);
-    }   
+    }
+    
     
     @Test
     public void multi_price_offer() throws Exception
@@ -57,7 +58,7 @@ public class CheckoutTest {
     	assertEquals(Checkout.checkout("AAA"), 130);
     	assertEquals(Checkout.checkout("AAAAA"), 200);
     	assertEquals(Checkout.checkout("AAAAAA"), 200 + 50);
-    	assertEquals(Checkout.checkout("AAAAA" + "AAAAA"), 200 + 200);
+    	assertEquals(Checkout.checkout("AAAAA"+ "AAAAA"), 200 + 200);
     }
     
     @Test
@@ -65,7 +66,7 @@ public class CheckoutTest {
     {
     	assertEquals(Checkout.checkout("EE"), 80);
     	assertEquals(Checkout.checkout("EEB"), 80);
-    	assertEquals(Checkout.checkout("EEEEBB"), 80+80);
+    	assertEquals(Checkout.checkout("EEEEB"), 80 + 80);
     }
     
     @Test
@@ -77,21 +78,27 @@ public class CheckoutTest {
     }
     
     @Test
-    public void combine_get_one_free_with_multi_price() throws Exception
+    public void get_item_offer() throws Exception
+    {
+    	assertEquals(Checkout.checkout("ST"), 20 + 20);
+    	assertEquals(Checkout.checkout("STT"), 45);
+    	assertEquals(Checkout.checkout("SXYZ"), 45 + 17);
+    	assertEquals(Checkout.checkout("SSS" + "TTT"), 45 + 45	);
+    	assertEquals(Checkout.checkout("ZZZ" + "XYZ"), 45 + 45	);
+    }
+    
+    @Test
+    public void combine_get_one_free_whit_multi_price() throws Exception
     {
     	assertEquals(Checkout.checkout("EEBB"), 80 + 30);
     	assertEquals(Checkout.checkout("EEB" + "BB"), 80 + 45);
     }
-    
+
+
     @Test
     public void round_acceptance_test_1() throws Exception
     {
-    	assertEquals(Checkout.checkout("EEB" + "VVV" + "VV" + "XYZ"), 80 + 130 + 90 + 90 + 10 + 50);
+    	assertEquals(Checkout.checkout("SXYZ" + "SXYZ"), 45 + 45 + 17 + 17);
     }
     
-    @Test
-    public void round_acceptance_test_2() throws Exception
-    {
-    	assertEquals(Checkout.checkout("HHHHHHHHHH"), 80);
-    }
 }
