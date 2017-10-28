@@ -24,6 +24,8 @@ public class Checkout {
 		prices.put('C', 20);
 		prices.put('D', 15);
 		prices.put('E', 40);
+		prices.put('F', 10);
+
 
 		char[] skus = basket.toCharArray();
 			
@@ -41,6 +43,7 @@ public class Checkout {
 		int countC = 0;
 		int countD = 0;
 		int countE = 0;
+		int countF = 0;
 		for(char sku : skus)
 		{
 			if(sku == 'A')
@@ -63,6 +66,10 @@ public class Checkout {
 			{
 				countE++;
 			}
+			if(sku == 'F')
+			{
+				countF++;
+			}
 		}
 		
 		
@@ -77,6 +84,16 @@ public class Checkout {
 				countB -= 1;
 			}
 			countE -= 2;
+		}
+		
+		while(countF >= 2)
+		{
+			totalPrice += 2 * prices.get('F');
+			countF -= 2;
+			if(countF > 0)
+			{
+				countF -= 1;
+			}
 		}
 		
 		while(countA >= 5)
@@ -100,6 +117,7 @@ public class Checkout {
 		totalPrice += countC * prices.get('C');
 		totalPrice += countD * prices.get('D');
 		totalPrice += countE * prices.get('E');
+		totalPrice += countF * prices.get('F');
 		
 
 		return totalPrice;
