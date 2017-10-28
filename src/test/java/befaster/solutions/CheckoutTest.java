@@ -57,6 +57,7 @@ public class CheckoutTest {
     	assertEquals(Checkout.checkout("AAA"), 130);
     	assertEquals(Checkout.checkout("AAAAA"), 200);
     	assertEquals(Checkout.checkout("AAAAAA"), 200 + 50);
+    	assertEquals(Checkout.checkout("AAAAA" + "AAAAA"), 200 + 200);
     }
     
     @Test
@@ -64,6 +65,7 @@ public class CheckoutTest {
     {
     	assertEquals(Checkout.checkout("EE"), 80);
     	assertEquals(Checkout.checkout("EEB"), 80);
+    	assertEquals(Checkout.checkout("EEEEBB"), 80+80);
     }
     
     @Test
@@ -81,10 +83,15 @@ public class CheckoutTest {
     	assertEquals(Checkout.checkout("EEB" + "BB"), 80 + 45);
     }
     
-    @Ignore
     @Test
-    public void round_acceptance_test() throws Exception
+    public void round_acceptance_test_1() throws Exception
     {
-    	assertEquals(Checkout.checkout("EEB" + "FFFF" + "A"), 80 + 20 + 10 + 50);
+    	assertEquals(Checkout.checkout("EEB" + "VVV" + "VV" + "XYZ"), 80 + 130 + 90 + 90 + 10 + 50);
+    }
+    
+    @Test
+    public void round_acceptance_test_2() throws Exception
+    {
+    	assertEquals(Checkout.checkout("HHHHHHHHHH"), 80);
     }
 }
